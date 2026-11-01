@@ -1,0 +1,233 @@
+@import "tailwindcss";
+
+/*
+ * NorthEd design tokens.
+ *
+ * The palette is a warm "printed page" scheme: paper, ink and a single
+ * saturated accent for actions. Nothing here is a default framework colour.
+ */
+@theme {
+  --color-paper: #f4f1e8;
+  --color-paper-deep: #e9e3d4;
+  --color-surface: #fffdf7;
+  --color-ink: #16201c;
+  --color-ink-soft: #3d4c45;
+  --color-ink-faint: #6d7b73;
+  --color-rule: #ddd6c4;
+  --color-rule-strong: #c6bda6;
+
+  --color-forest: #14513e;
+  --color-forest-deep: #0d3b2d;
+  --color-forest-soft: #e0eee6;
+  --color-sienna: #b4471f;
+  --color-sienna-soft: #f7e6dc;
+  --color-ochre: #a8801f;
+  --color-ochre-soft: #f6ecd4;
+
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+
+  --shadow-lift: 0 1px 2px rgb(22 32 28 / 0.05), 0 8px 24px -12px rgb(22 32 28 / 0.18);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    /* A very light paper grain, so large areas do not read as flat digital fill. */
+    background-image: radial-gradient(
+      rgb(22 32 28 / 0.035) 1px,
+      transparent 1px
+    );
+    background-size: 4px 4px;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    min-height: 100dvh;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-forest);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-sienna-soft);
+    color: var(--color-ink);
+  }
+}
+
+@layer components {
+  /* The one button style used everywhere: a solid, slightly squared action. */
+  .button-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--color-forest);
+    color: #fffdf7;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    padding: 0.625rem 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-forest-deep);
+    transition:
+      background-color 140ms ease,
+      transform 140ms ease;
+  }
+
+  .button-primary:hover:not(:disabled) {
+    background-color: var(--color-forest-deep);
+  }
+
+  .button-primary:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  .button-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .button-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    color: var(--color-ink);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    padding: 0.625rem 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-rule-strong);
+    transition:
+      background-color 140ms ease,
+      border-color 140ms ease;
+  }
+
+  .button-secondary:hover:not(:disabled) {
+    background-color: var(--color-paper-deep);
+    border-color: var(--color-ink-faint);
+  }
+
+  .button-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .button-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    background-color: transparent;
+    color: var(--color-ink-soft);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1;
+    padding: 0.375rem 0.5rem;
+    border-radius: var(--radius-xs);
+    transition:
+      background-color 140ms ease,
+      color 140ms ease;
+  }
+
+  .button-ghost:hover:not(:disabled) {
+    background-color: var(--color-paper-deep);
+    color: var(--color-ink);
+  }
+
+  .field {
+    width: 100%;
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    padding: 0.625rem 0.75rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-rule-strong);
+    transition:
+      border-color 140ms ease,
+      box-shadow 140ms ease;
+  }
+
+  .field::placeholder {
+    color: var(--color-ink-faint);
+  }
+
+  .field:focus {
+    outline: none;
+    border-color: var(--color-forest);
+    box-shadow: 0 0 0 3px rgb(20 81 62 / 0.12);
+  }
+
+  .field:disabled {
+    background-color: var(--color-paper-deep);
+    color: var(--color-ink-faint);
+  }
+
+  .label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+    margin-bottom: 0.375rem;
+  }
+
+  .rule {
+    border: 0;
+    border-top: 1px solid var(--color-rule);
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-sienna);
+  }
+
+  .prose-note {
+    color: var(--color-ink-soft);
+    line-height: 1.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
